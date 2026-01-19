@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForSkinn</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #ffd6e0, #ffe6f2);
+  }
+
+  header {
+    background-color: #ff9ecb;
+    padding: 15px 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 1px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+
+  nav a:hover { color: #ffe1ef; }
+
+  section {
+    display: none;
+    padding: 20px;
+  }
+
+  section.active { display: block; }
+
+  /* 🔸 Bagian Iklan */
+  .iklan-container {
+    width: 675px;
+    height: 240px;
+    overflow: hidden;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .iklan-slide {
+    display: flex;
+    transition: transform 1s ease;
+    width: 400%;
+  }
+
+  .iklan {
+    flex: 0 0 100%;
+  }
+
+  .iklan img {
+    width: 675px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  /* 🔸 Home Produk */
+  .home-produk-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 25px auto;
+  }
+
+  .home-produk {
+    background-color: white;
+    border-radius: 12px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+
+  .home-produk:hover { transform: scale(1.05); }
+  .home-produk img { width: 100%; border-radius: 12px 12px 0 0; }
+  .home-produk p { margin: 8px 0; font-weight: bold; color: #d63384; }
+
+  /* 🔸 Login */
+  .login-container {
+    background-color: white;
+    padding: 25px;
+    width: 330px;
+    margin: 100px auto;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .login-container input {
+    width: 100%; padding: 10px; margin-bottom: 15px;
+    border-radius: 6px; border: 1px solid #ccc;
+  }
+
+  .login-container button {
+    width: 100%; padding: 10px; background-color: #d63384; color: white;
+    border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
+  }
+
+  .login-container button:hover { background-color: #b81e6a; }
+
+  .section-nav {
+    margin-top: 20px;
+    display: flex; justify-content: space-between;
+  }
+
+  .section-nav button {
+    background-color: #d63384; color: white; border: none;
+    border-radius: 6px; padding: 8px 12px; cursor: pointer; font-weight: bold;
+  }
+
+  .section-nav button:hover { background-color: #b81e6a; }
+
+  /* 🔸 Produk Grid */
+  .produk-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .produk {
+    background-color: white;
+    border-radius: 12px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+
+  .produk:hover { transform: scale(1.05); }
+  .produk img { width: 100%; border-radius: 10px; }
+  .produk h4 { margin: 10px 0 5px 0; color: #333; }
+  .produk p { color: #d63384; font-weight: bold; margin-bottom: 10px; }
+
+  .beli-btn {
+    background-color: #ff4da6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .beli-btn:hover { background-color: #d63384; }
+
+  /* 🔸 Teks Diskon */
+  .diskon-link {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .diskon-link a {
+    color: #d63384;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .diskon-link a:hover {
+    text-decoration: underline;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section class="active" id="loginForm">
+  <div class="login-container">
+    <h2>Login ForSkinn</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="nextSection(true)">Masuk</button>
+  </div>
+</section>
+
+<!-- HOME -->
+<section id="home">
+  <header>
+    <div>ForSkinn</div>
+    <nav>
+      <a href="#" onclick="gotoSection(1)">Home</a>
+      <a href="#" onclick="gotoSection(2)">Profil</a>
+      <a href="#" onclick="gotoSection(3)">Produk</a>
+    </nav>
+  </header>
+
+  <div class="iklan-container">
+    <div class="iklan-slide" id="iklanSlide">
+      <div class="iklan"><img src="d3.jpg" alt="Promo 1"></div>
+      <div class="iklan"><img src="d4.jpg" alt="Promo 2"></div>
+      <div class="iklan"><img src="d9.jpg" alt="Promo 3"></div>
+      <div class="iklan"><img src="d6.jpg" alt="Promo 4"></div>
+    </div>
+  </div>
+
+  <h2>Hai, Cantik!</h2>
+  <p>Selamat datang di dunia ForSkinn, Tempat dimana kecantikan alami dan perawatan kulit berjalan beriringan. Di sini, kamu bisa menemukan produk perawatan yang lembut, menenangkan, dan dirancang khusus untuk kulit tropis Indonesia. Mari mulai perjalanan menuju kulit yang lebih sehat, cerah dan penuh percaya diri bersama ForSkinn!</p>
+  
+  <div class="home-produk-gallery">
+    <div class="home-produk"><img src="fw2.jpg"><p>Facial Wash</p></div>
+    <div class="home-produk"><img src="moi.jpg"><p>Moisturizer</p></div>
+    <div class="home-produk"><img src="ss.jpg"><p>Sunscreen</p></div>
+    <div class="home-produk"><img src="cm.jpg"><p>Clay Mask</p></div>
+    <div class="home-produk"><img src="serum2.jpg"><p>Brightening Serum</p></div>
+    <div class="home-produk"><img src="oil.jpg"><p>Cleansing Oil</p></div>
+  </div>
+
+  <div class="section-nav">
+    <button onclick="prevSection()">⬅ Back</button>
+    <button onclick="nextSection()">Next ➡</button>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <h2>Tentang Kami</h2>
+  <p><b>ForSkinn</b> adalah brand skincare lokal Indonesia yang hadir untuk menjawab kebutuhan perawatan kulit masyarakat tropis. Kami percaya bahwa kulit sehat adalah cerminan gaya hidup dan perawatan yang konsisten. Dengan menggabungkan bahan alami berkualitas dan teknologi dermatologis modern, ForSkinn berkomitmen menciptakan produk yang aman,efektif, dan cocok untuk semuan jenis kulit.</p>
+  <h3>🌸 Visi</h3>
+  <p>Menjadi brand skincare lokal terpercya yang  menghadirkan produk inovatif, aman, dan efektif untuk membantu masyarakat Indonesia mendapatkan kulit sehat, cerah alami, serta meningkatkan kepercayaan diri tanpa batas.</p>
+  <h3>🌼 Misi</h3>
+  <ul>
+    <li>Menjaga standar keamanan dan kualitas dalam setiap proses produksi.</li>
+    <li>MMenghadirkan produk skincare berkualitas tinggi dengan bahan alami yang ramah untuk semua jenis kulit.</li>
+    <li>Mengedukasi masyarakat tentang pentingnya merawat kulit dengan cara yang benar dan berkelanjutan.</li>
+  </ul>
+  <h3>💖 Keunggulan</h3>
+  <ul>
+    <li>Aman dan teruji dermatologis, Setiap produk melewati uji laboratirium untuk memastikan keamanan dan efektivitasnya.</li>
+    <li> Harga terjangkau, Kualitas premium ForSkinn oercaya bahwa perawatan kulit berkualitas tidak harus mahal.</li>
+    <li>Cocok untuk semua jenis kulit, Didesain khusus untuk kulit tropis lembap, ringan, dan tidak menyebabkan iritasi.</li>
+  </ul>
+  <div class="section-nav">
+    <button onclick="prevSection()">⬅ Back</button>
+    <button onclick="nextSection()">Next ➡</button>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+  <h2>Produk Kami</h2>
+  <div class="produk-grid" id="produkContainer"></div>
+
+  <!-- 🔸 Teks Diskon -->
+  <div class="diskon-link">
+    <a href="#" onclick="gotoSection(4)">💖 Diskon 50%</a>
+  </div>
+
+  <div class="section-nav">
+    <button onclick="prevSection()">⬅ Back</button>
+  </div>
+</section>
+
+<!-- DISKON -->
+<section id="diskon">
+  <h2>💖 Promo Diskon 50%</h2>
+  <p>
+    Selamat! Dalam rangka promo akhir tahun, ForSkinn memberikan potongan harga hingga <b>50%</b> untuk produk pilihan.
+    Promo ini berlaku hingga akhir bulan, jadi jangan lewatkan kesempatan untuk mendapatkan produk perawatan kulit alami
+    dengan harga terbaik!
+  </p>
+  <ul>
+    <li>Moisturizer - Dari Rp 89.000 menjadi Rp 44.500</li>
+    <li>Brightening Serum - Dari Rp 120.000 menjadi Rp 60.000</li>
+    <li>Facial Wash - Dari Rp 59.000 menjadi Rp 29.500</li>
+    <li>Cleansing Oil - Dari Rp 110.000 menjadi Rp 55.000</li>
+  </ul>
+
+  <div class="section-nav">
+    <button onclick="prevSection()">⬅ Kembali ke Produk</button>
+  </div>
+</section>
+
+<script>
+const sections = ["loginForm","home","profile","produk","diskon"];
+let currentSection = 0;
+
+function showCurrentSection() {
+  sections.forEach((id)=>document.getElementById(id).classList.remove("active"));
+  document.getElementById(sections[currentSection]).classList.add("active");
+}
+
+function nextSection(skipLogin=false){
+  if(currentSection===0 && !skipLogin){
+    const user=document.getElementById('username').value;
+    const pass=document.getElementById('password').value;
+    if(user!=="ForSkinn" || pass!=="ForSkinn"){
+      alert("Username atau Password salah!\nGunakan Username: ForSkinn\nPassword: ForSkinn");
+      return;
+    }
+  }
+  if(currentSection<sections.length-1) currentSection++;
+  showCurrentSection();
+}
+
+function prevSection(){
+  if(currentSection>0) currentSection--;
+  showCurrentSection();
+}
+
+function gotoSection(index){
+  currentSection=index;
+  showCurrentSection();
+}
+
+// 🔸 SLIDE IKLAN OTOMATIS
+let currentIklan = 0;
+const iklanSlide = document.getElementById("iklanSlide");
+const totalIklan = 4;
+
+setInterval(()=>{
+  currentIklan = (currentIklan + 1) % totalIklan;
+  iklanSlide.style.transform = `translateX(-${currentIklan * 100}%)`;
+},4000);
+
+// 🔸 PRODUK GRID
+const produkList=[
+  {img:"fw2.jpg", name:"Facial Wash", price:"Rp 59.000"}, 
+  {img:"moi.jpg", name:"Moisturizer", price:"Rp 89.000"},
+  {img:"ss.jpg", name:"Sunscreen", price:"Rp 99.000"},
+  {img:"cm.jpg", name:"Clay Mask", price:"Rp 75.000"},
+  {img:"serum2.jpg", name:"Brightening Serum", price:"Rp 120.000"},
+  {img:"toner.jpg", name:"Toner", price:"Rp 65.000"},
+  {img:"oil.jpg", name:"Cleansing Oil", price:"Rp 110.000"},
+  {img:"sm.jpg", name:"Sheet Mask", price:"Rp 7.000"},
+  {img:"fcm.jpg", name:"Face Mist", price:"Rp 30.000"},
+  {img:"ec.jpg", name:"Eye Cream", price:"Rp 95.000"},
+  {img:"nc.jpg", name:"Night Cream", price:"Rp 55.000"},
+  {img:"dc.jpg", name:"Day Cream", price:"Rp 50.000"},
+  
+];
+
+function renderProduk(){
+  const container=document.getElementById('produkContainer');
+  container.innerHTML="";
+  produkList.forEach(prod=>{
+    container.innerHTML+=`
+      <div class="produk">
+        <img src="${prod.img}" alt="${prod.name}">
+        <h4>${prod.name}</h4>
+        <p>${prod.price}</p>
+        <button class="beli-btn">Beli Sekarang</button>
+      </div>
+    `;
+  });
+}
+renderProduk();
+</script>
+</body>
+</html>
+
